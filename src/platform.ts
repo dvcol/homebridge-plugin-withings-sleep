@@ -1,7 +1,9 @@
-import { API, DynamicPlatformPlugin, Logger, PlatformAccessory, PlatformConfig, Service, Characteristic } from 'homebridge';
-
-import { PLATFORM_NAME, PLUGIN_NAME } from './settings';
 import { ExamplePlatformAccessory } from './platformAccessory';
+import { PLATFORM_NAME, PLUGIN_NAME } from './settings';
+
+import type {
+ API, DynamicPlatformPlugin, Logger, PlatformAccessory, PlatformConfig, Service, Characteristic,
+} from 'homebridge';
 
 /**
  * HomebridgePlatform
@@ -24,9 +26,7 @@ export class ExampleHomebridgePlatform implements DynamicPlatformPlugin {
 
     // Homebridge 1.8.0 introduced a `log.success` method that can be used to log success messages
     // For users that are on a version prior to 1.8.0, we need a 'polyfill' for this method
-    if (!log.success) {
-      log.success = log.info;
-    }
+    if (!log.success) log.success = log.info;
 
     // When this event is fired it means Homebridge has restored all cached accessories from disk.
     // Dynamic Platform plugins should only register new accessories after this event was fired,
@@ -56,7 +56,6 @@ export class ExampleHomebridgePlatform implements DynamicPlatformPlugin {
    * must not be registered again to prevent "duplicate UUID" errors.
    */
   discoverDevices() {
-
     // EXAMPLE ONLY
     // A real plugin you would discover accessories from the local network, cloud services
     // or a user-defined array in the platform config.
@@ -73,7 +72,6 @@ export class ExampleHomebridgePlatform implements DynamicPlatformPlugin {
 
     // loop over the discovered devices and register each one if it has not already been registered
     for (const device of exampleDevices) {
-
       // generate a unique id for the accessory this should be generated from
       // something globally unique, but constant, for example, the device serial
       // number or MAC address
@@ -99,7 +97,8 @@ export class ExampleHomebridgePlatform implements DynamicPlatformPlugin {
         // remove platform accessories when no longer present
         // this.api.unregisterPlatformAccessories(PLUGIN_NAME, PLATFORM_NAME, [existingAccessory]);
         // this.log.info('Removing existing accessory from cache:', existingAccessory.displayName);
-      } else {
+      }
+ else {
         // the accessory does not yet exist, so we need to create it
         this.log.info('Adding new accessory:', device.exampleDisplayName);
 

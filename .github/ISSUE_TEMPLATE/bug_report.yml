@@ -1,0 +1,78 @@
+name: Bug report
+description: Report errors or unexpected issues
+title: '[bug]: Bug Report (please change this title)'
+labels: [bug, bug-report]
+assignees: []
+
+body:
+  - type: markdown
+    attributes:
+      value: Thanks for creating an issue! In order to expedite the bug fixing please fill as much of the following categories as possible.
+
+  - type: input
+    id: version-extension
+    attributes:
+      label: Plugin version
+      description: The version of the plugin (visible in the manage extension page in your browser or the about page).
+      placeholder: ex. 2.0.2
+    validations:
+      required: true
+
+  - type: input
+    id: version-homebridge
+    attributes:
+      label: Homebridge version
+      description: The version of your Homebridge instance
+      placeholder: e.g. Homebridge v1.8.0, Hoobs v3.2.10, Node 20.0.0
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Description
+      description: A brief description of the issue.
+      placeholder: |
+        Describe what happens:
+
+        Everytime I click on ...
+    validations:
+      required: true
+
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: Steps to Reproduce the Issue
+      description: Please describe in details the steps to reproduce your issue.
+      placeholder: |
+        Describe how to reproduce:
+
+          1. When I'm doing this
+          2. Then this
+          3. While having this open
+          4. This doesn't work
+    validations:
+      required: true
+
+  - type: textarea
+    id: screenshots
+    attributes:
+      label: Screenshots or Mock up
+      description: If possible provide a screenshot or a mock-up of the issue.
+      placeholder: Paster your screenshot of mockup here.
+    validations:
+      required: false
+
+  - type: textarea
+    id: logs
+    attributes:
+      render: console
+      label: Failure Logs
+      description: |
+        If possible open the console and then copy pasting any error log you can find.
+        We recommend reproducing the issue with debug logging enabled everywhere to facilitate debugging.
+      placeholder: |
+        Paste your logs here :
+        ...
+    validations:
+      required: false
