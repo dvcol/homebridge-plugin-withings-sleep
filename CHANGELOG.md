@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.2.0](https://github.com/dvcol/homebridge-plugin-withings-sleep/compare/v1.1.0...v1.2.0) (2024-05-24)
+
+
+### Features
+
+* **server:** adds ssl support ([03111dd](https://github.com/dvcol/homebridge-plugin-withings-sleep/commit/03111ddd31df70eec9da04f9269c3e3bea4f4707))
+
 ## 1.1.0 (2024-05-24)
 
 
