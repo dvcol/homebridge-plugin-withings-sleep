@@ -1,3 +1,5 @@
+import { readFileSync } from 'node:fs';
+
 import Fastify from 'fastify';
 
 import { AccessoryName, PluginName } from './homebridge.model.js';
@@ -5,6 +7,7 @@ import { AccessoryName, PluginName } from './homebridge.model.js';
 import { endpoints, getResponseHandler } from './http.utils.js';
 
 import type { AccessoryConfig, AccessoryPlugin, API, CharacteristicValue, HAP, Logging, Service } from 'homebridge';
+import type { SecureContextOptions } from 'tls';
 
 /*
  * IMPORTANT NOTICE
@@ -37,6 +40,8 @@ export default (api: API) => {
   hap = api.hap;
   api.registerAccessory(AccessoryName, WithingSleepSwitch);
 };
+
+type ServerConfig = { port?: number; ssl?: { key: string; cert: string } };
 
 class WithingSleepSwitch implements AccessoryPlugin {
   private readonly log: Logging;
@@ -93,10 +98,16 @@ class WithingSleepSwitch implements AccessoryPlugin {
     if (!sensor || sensor === 'occupancy') this.occupancyService.setCharacteristic(hap.Characteristic.OccupancyDetected, state);
   }
 
-  async startServer({ port = 3000 }: { port?: number }) {
-    const app = Fastify({
-      logger: true,
-    });
+  async startServer({ port = 3000, ssl }: ServerConfig) {
+    const config: { logger: boolean; https?: SecureContextOptions } = { logger: true };
+    if (ssl?.cert && ssl?.key) {
+      this.log.info('Configuring server with SSL enabled');
+      config.https = {
+        key: readFileSync(ssl.key),
+        cert: readFileSync(ssl.cert),
+      };
+    }
+    const app = Fastify(config);
 
     endpoints.forEach(({ uri, log, sensor, state }) => {
       app.get(
@@ -144,7 +155,11 @@ class WithingSleepSwitch implements AccessoryPlugin {
     this.occupancyService = this.initOccupancyService();
     this.informationService = this.initInformationService();
 
-    this.startServer({ port: Number(config.port) });
+    const serverConfig: ServerConfig = { port: Number(config.port) };
+    if (config.cert && config.key) {
+      serverConfig.ssl = { key: config.key, cert: config.cert };
+    }
+    this.startServer(serverConfig);
   }
 
   /*

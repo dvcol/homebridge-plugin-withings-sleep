@@ -25,6 +25,16 @@
           "title": "Hosts",
           "type": "string"
         }
+      },
+      "cert": {
+        "title": "Path to SSL Certificate",
+        "type": "string",
+        "required": false
+      },
+      "key": {
+        "title": "Path to SSL Certificate Key",
+        "type": "string",
+        "required": false
       }
     }
   }
