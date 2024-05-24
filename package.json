@@ -2,7 +2,7 @@
   "name": "@dvcol/homebridge-plugin-withings-sleep",
   "displayName": "Withings Sleep Homebridge Plugin",
   "type": "module",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "packageManager": "pnpm@9.1.0",
   "description": "A simple plugin to expose withings sleep as an occupancy sensor",
   "keywords": [
