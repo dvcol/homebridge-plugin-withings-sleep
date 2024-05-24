@@ -1,6 +1,6 @@
 {
-  "pluginAlias": "ExampleHomebridgePlugin",
-  "pluginType": "platform",
+  "pluginAlias": "Withings Sleep Homebridge Plugin",
+  "pluginType": "accessory",
   "singular": true,
   "schema": {
     "type": "object",
@@ -9,7 +9,22 @@
         "title": "Name",
         "type": "string",
         "required": true,
-        "default": "Example Dynamic Platform"
+        "default": "Withings Sleep"
+      },
+      "port": {
+        "title": "Server Port",
+        "type": "string",
+        "required": true,
+        "default": "3000"
+      },
+      "hosts": {
+        "title": "Authorized Hosts or Ips",
+        "type": "array",
+        "required": false,
+        "items": {
+          "title": "Hosts",
+          "type": "string"
+        }
       }
     }
   }

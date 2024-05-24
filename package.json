@@ -1,29 +1,35 @@
 {
-  "name": "homebridge-plugin-withings-sleep",
-  "displayName": "Plugin Name",
+  "name": "@dvcol/homebridge-plugin-withings-sleep",
+  "displayName": "Withings Sleep Homebridge Plugin",
   "type": "module",
   "version": "1.0.0",
-  "private": true,
-  "packageManager": "pnpm@9.0.4",
+  "packageManager": "pnpm@9.1.0",
   "description": "A simple plugin to expose withings sleep as an occupancy sensor",
   "keywords": [
     "homebridge-plugin"
   ],
   "bugs": {
-    "url": "https://github.com/USERNAME/GITHUB_PROJECT_NAME/issues"
+    "url": "https://github.com/dvcol/homebridge-plugin-withings-sleep/issues"
   },
   "license": "Apache-2.0",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/USERNAME/GITHUB_PROJECT_NAME.git"
+    "url": "git+https://github.com/dvcol/homebridge-plugin-withings-sleep.git"
+  },
+  "publishConfig": {
+    "access": "public"
   },
   "main": "dist/index.js",
   "scripts": {
     "prepare": "husky",
     "clear": "rimraf dist",
     "build": "pnpm run clear && tsc",
-    "watch": "pnpm run build && pnpm link && nodemon",
-    "test:unit": "vitest run --coverage --mode testing",
+    "link": "pnpm link --global",
+    "homebridge": "homebridge -I -D",
+    "homebridge:ui": "homebridge-config-ui-x -I -D -P 8080",
+    "start": "nodemon",
+    "watch": "run-s build link start",
+    "test:unit": "vitest run --coverage --mode testing --passWithNoTests",
     "test:watch": "vitest --mode testing",
     "lint": "eslint src",
     "lint:fix": "pnpm run lint --fix",
@@ -31,7 +37,7 @@
     "release:changelog": "extract-changelog-release > RELEASE.md"
   },
   "dependencies": {
-    "homebridge": "^1.8.0"
+    "fastify": "~4.26.2"
   },
   "devDependencies": {
     "@commitlint/cli": "^19.0.0",
@@ -47,10 +53,12 @@
     "eslint-plugin-prettier": "^5.1.3",
     "eslint-plugin-vitest": "^0.4.1",
     "extract-changelog-release": "^1.0.2",
+    "homebridge": "^1.8.2",
     "homebridge-config-ui-x": "^4.56.2",
     "husky": "^9.0.6",
     "lint-staged": "^15.0.0",
     "nodemon": "^3.1.0",
+    "npm-run-all": "^4.1.5",
     "prettier": "^3.1.1",
     "rimraf": "^5.0.5",
     "standard-version": "^9.5.0",
