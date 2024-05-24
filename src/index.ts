@@ -38,7 +38,7 @@ let hap: HAP;
  */
 export default (api: API) => {
   hap = api.hap;
-  api.registerAccessory(AccessoryName, WithingSleepSwitch);
+  api.registerAccessory(PluginName, AccessoryName, WithingSleepSwitch);
 };
 
 type ServerConfig = { port?: number; ssl?: { key: string; cert: string } };
@@ -55,7 +55,7 @@ class WithingSleepSwitch implements AccessoryPlugin {
   private readonly informationService: Service;
 
   initSwitchService() {
-    const service = new hap.Service.Switch(`${this.name} Switch`);
+    const service = new hap.Service.Switch(this.name, 'Switch');
     service
       .getCharacteristic(hap.Characteristic.On)
       .onGet(async () => {
@@ -71,7 +71,7 @@ class WithingSleepSwitch implements AccessoryPlugin {
   }
 
   initOccupancyService() {
-    const service = new hap.Service.OccupancySensor(`${this.name} Occupancy Sensor`);
+    const service = new hap.Service.OccupancySensor(this.name, 'Occupancy Sensor');
     service
       .getCharacteristic(hap.Characteristic.OccupancyDetected)
       .onGet(() => {

@@ -1,5 +1,5 @@
 {
-  "pluginAlias": "Withings Sleep Homebridge Plugin",
+  "pluginAlias": "Withings Sleep",
   "pluginType": "accessory",
   "singular": true,
   "schema": {
