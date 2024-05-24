@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.2.1](https://github.com/dvcol/homebridge-plugin-withings-sleep/compare/v1.2.0...v1.2.1) (2024-05-24)
+
+
+### Bug Fixes
+
+* **schema:** change default alias ([354ec54](https://github.com/dvcol/homebridge-plugin-withings-sleep/commit/354ec54109e5e52be13a4ea37ec543743c6bdfbd))
+
 ## [1.2.0](https://github.com/dvcol/homebridge-plugin-withings-sleep/compare/v1.1.0...v1.2.0) (2024-05-24)
 
 
